@@ -2,7 +2,7 @@
 
 **Paper**: *QO-Bench: Diagnosing Query-Operator-Preserving Retrieval over Typed Event Tuples*
 
-**Authors**: Mengao Zhang, Xiang Yang*, Liu Chang, Tan Tianhui, Ke-Wei Huang
+**Authors**: Mengao Zhang, Xiang Yang*, Chang Liu, Tianhui Tan, Ke-Wei Huang
 Asian Institute of Digital Finance, National University of Singapore.
 Correspondence: Mengao Zhang (`mengaoz@nus.edu.sg`).
 *Work done during an internship at the Asian Institute of Digital Finance, National University of Singapore.
