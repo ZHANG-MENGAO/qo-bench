@@ -65,5 +65,5 @@ sample sizes, examples, diagnostic targets).
 
 ## License
 
-CC-BY-4.0. See `../DATA_LICENSE` and the upstream attribution requirements
+CC-BY-NC-4.0. See `../DATA_LICENSE` and the upstream attribution requirements
 documented there.

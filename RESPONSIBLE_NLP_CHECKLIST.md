@@ -50,7 +50,7 @@ Appendix~\ref{app:disclaimer}.
   provenance article IDs are released. Reconstructing the original vendor
   records requires a separate S&P Capital IQ license.
 - **Our derivative outputs** (questions, gold answers, baseline
-  predictions): CC-BY-4.0.
+  predictions): CC-BY-NC-4.0.
 - **Code**: MIT.
 
 ### B3. Is the use consistent with their intended use?

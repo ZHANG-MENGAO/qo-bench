@@ -1,4 +1,4 @@
-# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-4.0.
+# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-NC-4.0.
 # See LICENSE and DATA_LICENSE at bundle root for terms.
 """Single-load `dict[article_url → row]` for `eval_bundle_v3_2026-05-21/corpus/articles.csv`.
 

@@ -20,7 +20,7 @@ supporting documentation.
 emnlp_supplementary/
 ├── README.md                          (this file)
 ├── LICENSE                            (MIT — code)
-├── DATA_LICENSE                       (CC-BY-4.0 — benchmark questions + derived data)
+├── DATA_LICENSE                       (CC-BY-NC-4.0 — benchmark questions + derived data)
 ├── RESPONSIBLE_NLP_CHECKLIST.md       (full ARR checklist response)
 ├── requirements.txt                   (pinned Python deps)
 │
@@ -138,7 +138,7 @@ match the paper within small run-to-run noise rather than to the digit.
 ## License
 
 - Code: **MIT** (see `LICENSE`).
-- Benchmark questions + IE outputs: **CC-BY-4.0** (see `DATA_LICENSE`).
+- Benchmark questions + IE outputs: **CC-BY-NC-4.0** (see `DATA_LICENSE`).
 - Upstream sources (FNSPID, S&P Capital IQ KeyDev): see their original
   licenses; this bundle re-uses derivative outputs only.
 

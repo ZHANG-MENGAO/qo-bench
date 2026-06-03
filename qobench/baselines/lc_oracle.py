@@ -1,4 +1,4 @@
-# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-4.0.
+# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-NC-4.0.
 # See LICENSE and DATA_LICENSE at bundle root for terms.
 """LC-oracle baseline runner — feed only golden chunks to a
 single Qwen3.6-27B call at 262K native context. Capability-ceiling reference for

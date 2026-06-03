@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-4.0.
+# QO-Bench (Zhang et al., 2026) — code/data released under MIT/CC-BY-NC-4.0.
 # See LICENSE and DATA_LICENSE at bundle root for terms.
 """Inject event_definitions.md into GraphRAG system prompts.
 
