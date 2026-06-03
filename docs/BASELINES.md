@@ -44,12 +44,12 @@ controlled via `reasoning.effort = medium`.
 | no-context  | **16,384**   | Closed-book questions are short; capping prevents runaway generation                         |
 | RAG         | vLLM default | Single-shot, bounded by `max_model_len` − input                                              |
 | ReAct RAG   | controlled via `reasoning.effort` | OpenRouter handles routing; effort = medium |
-| GraphRAG    | graphrag 3.0.9 defaults | See `aggqa/baselines/graphrag/settings.yaml` |
+| GraphRAG    | graphrag 3.0.9 defaults | See `qobench/baselines/graphrag/settings.yaml` |
 | IE→SQL (extraction) | 8,192 | Per-article extraction is bounded; multi-chunk articles get multiple calls |
 
 ---
 
-## §B — RAG (`aggqa/baselines/naive_rag.py`)
+## §B — RAG (`qobench/baselines/naive_rag.py`)
 
 Single-shot retrieve → prompt → LLM.
 
@@ -60,11 +60,11 @@ Single-shot retrieve → prompt → LLM.
 | Reranker | Qwen3-Reranker-4B via DeepInfra |
 | Top-k | 100 candidates from hybrid → 30 reranked → 30 to LLM |
 | Filter | Per-question date window (event-type-asymmetric — see paper Table 6) + optional firm ticker pre-filter |
-| Prompt | `aggqa/prompts/prompt_template.py` (shared across LLM/RAG paradigms; event-definitions prepended) |
+| Prompt | `qobench/prompts/prompt_template.py` (shared across LLM/RAG paradigms; event-definitions prepended) |
 
 ---
 
-## §C — ReAct RAG (`aggqa/baselines/react.py`)
+## §C — ReAct RAG (`qobench/baselines/react.py`)
 
 Agentic, multi-round retrieval. LangChain `langchain.agents.create_agent`
 (v1.0, replaces deprecated `langgraph.prebuilt.create_react_agent`).
@@ -80,7 +80,7 @@ Agentic, multi-round retrieval. LangChain `langchain.agents.create_agent`
 
 ---
 
-## §D — LC-oracle ceiling (`aggqa/baselines/lc_oracle.py`)
+## §D — LC-oracle ceiling (`qobench/baselines/lc_oracle.py`)
 
 Not a deployable paradigm — feeds each question its gold-attested chunks
 directly (linked via provenance). Isolates retrieval failure: any gap
@@ -96,7 +96,7 @@ contribution.
 
 ---
 
-## §E — no-context floor (`aggqa/baselines/no_context.py`)
+## §E — no-context floor (`qobench/baselines/no_context.py`)
 
 Closed-book control: question only, no retrieval, no context. Documents
 how much the LLM "knows" about the specific events without evidence.
@@ -113,7 +113,7 @@ knowledge alone.
 
 ---
 
-## §F — GraphRAG (`aggqa/baselines/graphrag/`)
+## §F — GraphRAG (`qobench/baselines/graphrag/`)
 
 Microsoft graphrag 3.0.9, **source code unmodified**. Both local and global
 search modes evaluated.
@@ -129,13 +129,13 @@ search modes evaluated.
 | Query settings | graphrag 3.0.9 stock defaults; `top_k_mapped_entities=10`, `community_level=2` |
 | Prompts | 5 of 12 user-facing prompts modified for (a) event-ontology prepend and (b) URL-aware citation; stock 7 of 12 not bundled (see microsoft/graphrag upstream) |
 
-See `aggqa/baselines/graphrag/README.md` for full details. Note: GraphRAG
+See `qobench/baselines/graphrag/README.md` for full details. Note: GraphRAG
 indexing is expensive (~16h on 4 GPUs with `extract_claims=true`); the
 heavy index artifacts (parquets + lancedb, ~2.4 GB) are not bundled.
 
 ---
 
-## §G — IE→SQL (`aggqa/baselines/ie_sql/`)
+## §G — IE→SQL (`qobench/baselines/ie_sql/`)
 
 Three-stage paradigm:
 
@@ -157,7 +157,7 @@ Three-stage paradigm:
 | Coordination | Filesystem-claim locks for multi-worker extraction |
 | Per-template SQL | SQL families in `run_ie_sql.py:DISPATCH` covering all 18 paper templates (A/B IDs) |
 
-See `aggqa/baselines/ie_sql/README.md` for runbook. IE→SQL is the
+See `qobench/baselines/ie_sql/README.md` for runbook. IE→SQL is the
 strongest deployable paradigm on QO-Bench's compositional operators
 (intersection, count, group), where SQL executes natively. Its main
 weakness is cross-event temporal joins where the extractor under-populates

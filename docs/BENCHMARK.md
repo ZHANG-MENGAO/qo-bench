@@ -94,7 +94,7 @@ Each line in the JSONL is one question:
 
 ## Scoring
 
-`../aggqa/eval/eval.py` and `../aggqa/eval/eval_tolerant.py` implement
+`../qobench/eval/eval.py` and `../qobench/eval/eval_tolerant.py` implement
 the strict (±0-day) and tolerant (±7-day) scorers respectively.
 
 The paper's primary metric is **tolerant ±7-day recall on the covered
@@ -116,7 +116,7 @@ Important schema variability across templates (the scorer handles both):
 
 1. Generate predictions with any baseline:
    ```
-   PYTHONPATH=. python -m aggqa.baselines.naive_rag \
+   PYTHONPATH=. python -m qobench.baselines.naive_rag \
      --benchmark benchmark/questions/questions.jsonl.gz \
      --output-dir outputs/
    ```
@@ -125,7 +125,7 @@ Important schema variability across templates (the scorer handles both):
 2. Score (tolerant ±7d is the paper's primary metric). The scorer is
    stdlib-only and runs standalone:
    ```
-   python3 aggqa/eval/eval_tolerant.py \
+   python3 qobench/eval/eval_tolerant.py \
      --questions benchmark/questions/questions.jsonl.gz \
      --predictions outputs/predictions.jsonl \
      --config benchmark/templates_config.json \

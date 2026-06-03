@@ -7,7 +7,7 @@ from the FNSPID news corpus and the S&P Capital IQ KeyDev event feed.
 > **Distinction**: This pipeline produces the benchmark's *ground truth*.
 > It is NOT the IE→SQL *baseline paradigm*. The IE→SQL baseline (one of
 > the 5 deployable paradigms evaluated in the paper) lives at
-> `../aggqa/baselines/ie_sql/`. They are two different uses of LLM-driven
+> `../qobench/baselines/ie_sql/`. They are two different uses of LLM-driven
 > IE on the same corpus: one builds GT, one tries to *answer questions*
 > using its own extraction.
 
@@ -91,7 +91,7 @@ inter-annotator. Disagreements concentrate on M&A lifecycle ambiguity
 - `README.md` — overview of the attestation pipeline.
 
 The IE$\to$SQL baseline itself (schema generation, extraction worker, and
-per-template SQL) lives in `../aggqa/baselines/ie_sql/`.
+per-template SQL) lives in `../qobench/baselines/ie_sql/`.
 
 ## 3. What's NOT shipped, and why
 
@@ -125,7 +125,7 @@ per-template SQL) lives in `../aggqa/baselines/ie_sql/`.
 
 ## 5. Relationship to IE→SQL baseline
 
-The IE→SQL **baseline paradigm** (`../aggqa/baselines/ie_sql/`) is a
+The IE→SQL **baseline paradigm** (`../qobench/baselines/ie_sql/`) is a
 *separate* use of LLM-driven IE. It:
 
 1. Generates a typed schema from event definitions (GPT-5.5),
@@ -134,4 +134,4 @@ The IE→SQL **baseline paradigm** (`../aggqa/baselines/ie_sql/`) is a
 
 It does **not** use the attestation pipeline's outputs. It runs IE
 independently and is scored against the same gold answers as RAG / ReAct /
-GraphRAG / LC-oracle. See `../aggqa/baselines/ie_sql/README.md`.
+GraphRAG / LC-oracle. See `../qobench/baselines/ie_sql/README.md`.

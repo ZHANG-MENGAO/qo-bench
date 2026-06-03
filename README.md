@@ -24,7 +24,7 @@ emnlp_supplementary/
 ├── RESPONSIBLE_NLP_CHECKLIST.md       (full ARR checklist response)
 ├── requirements.txt                   (pinned Python deps)
 │
-├── aggqa/                             (Python package — codename for QO-Bench code)
+├── qobench/                           (the QO-Bench Python package)
 │   ├── baselines/                     (5 deployable paradigms + LC-oracle ceiling + no-context floor)
 │   │   ├── naive_rag.py               (RAG: hybrid dense+BM25 retrieval, top-30 reranked, Qwen3.6-27B answers)
 │   │   ├── react.py + react_agent.py + notebook.py  (ReAct RAG: agentic, ≤5 retrieval calls per question)
@@ -75,7 +75,7 @@ emnlp_supplementary/
   independently (see "How to reproduce" below).
 
 The per-paradigm predictions and tolerant-scored `eval_results` referenced in
-the paper **are** included under `aggqa/baselines/<paradigm>/` for inspection
+the paper **are** included under `qobench/baselines/<paradigm>/` for inspection
 and re-scoring.
 
 ## How to navigate
@@ -85,8 +85,8 @@ and re-scoring.
    produce the questions.
 3. Then `docs/BASELINES.md` — what each of the 5 paradigms does + the
    LC-oracle ceiling.
-4. To inspect any specific baseline: `aggqa/baselines/<name>/` or
-   `aggqa/baselines/<name>.py`.
+4. To inspect any specific baseline: `qobench/baselines/<name>/` or
+   `qobench/baselines/<name>.py`.
 5. For the IE pipeline that built the benchmark itself, not the baseline:
    `docs/IE_PIPELINE.md` + `extraction/`.
 
@@ -102,9 +102,9 @@ are released in `benchmark/questions/questions.jsonl.gz` (the `gt` field).
 python -m pip install -r requirements.txt
 
 # 1. Corpus. Download the public FNSPID news dataset and keep the 22,984-article
-#    subset selected by aggqa/infra/v2_url_hash_whitelist.json (URL-hash list).
+#    subset selected by qobench/infra/v2_url_hash_whitelist.json (URL-hash list).
 #    The benchmark questions already carry their rendered natural-language text
-#    (the `question` field), produced by aggqa/infra/question_renderer.py from
+#    (the `question` field), produced by qobench/infra/question_renderer.py from
 #    (template id, params); rerun that module only if you regenerate questions.
 
 # 2. Answer LLM. Serve Qwen3.6-27B with vLLM and set VLLM_ENDPOINT
@@ -114,16 +114,16 @@ python -m pip install -r requirements.txt
 
 # 3. Retrieval index (RAG / ReAct only). Embed the corpus with Qwen3-Embedding-4B
 #    (local via sentence-transformers, or DeepInfra) and load into Milvus; set
-#    MILVUS_URI / MILVUS_TOKEN. aggqa/scripts/precache_retrieval.py caches the
+#    MILVUS_URI / MILVUS_TOKEN. qobench/scripts/precache_retrieval.py caches the
 #    per-question top-k. (LC-oracle, no-context, IE->SQL need no Milvus.)
 
 # 4. Run a paradigm -> predictions.jsonl  (each runner takes --benchmark)
-python -m aggqa.baselines.lc_oracle  --benchmark benchmark/questions/questions.jsonl.gz ...
-python -m aggqa.baselines.naive_rag  --benchmark benchmark/questions/questions.jsonl.gz ...
+python -m qobench.baselines.lc_oracle  --benchmark benchmark/questions/questions.jsonl.gz ...
+python -m qobench.baselines.naive_rag  --benchmark benchmark/questions/questions.jsonl.gz ...
 #   (also: react_agent, no_context, baselines/graphrag/, baselines/ie_sql/run_ie_sql.py)
 
 # 5. Score against the released gold (tolerant +/-7d, the paper's main metric)
-python -m aggqa.eval.eval_tolerant \
+python -m qobench.eval.eval_tolerant \
     --questions   benchmark/questions/questions.jsonl.gz \
     --predictions predictions.jsonl \
     --config      benchmark/templates_config.json \
@@ -131,7 +131,7 @@ python -m aggqa.eval.eval_tolerant \
 ```
 
 GraphRAG's already-run predictions and scores are in
-`aggqa/baselines/graphrag/{predictions,eval_results}/` as a reference.
+`qobench/baselines/graphrag/{predictions,eval_results}/` as a reference.
 LLM decoding is not perfectly deterministic, so reproduced numbers should
 match the paper within small run-to-run noise rather than to the digit.
 

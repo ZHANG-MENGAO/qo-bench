@@ -6,7 +6,12 @@ determine whether the news corpus (db.mna) covers it.
 
 L0 = any article linked by event_id (count)
 L1 = among those articles, how many have participant company name in title
-L2 = LLM verdict (early-stop: covered as soon as one article confirmed)
+L2 = single-judge LLM verdict (early-stop: covered as soon as one article confirmed)
+
+The paper's 3-judge attestation runs this funnel once per judge model and
+keeps a pair only on unanimous 3-of-3 confirmation. Select the judge via the
+LLM_MODEL env var (the three judges are Gemma-4-31B-IT, Qwen3.6-27B, and
+gpt-oss-120B; see ../docs/IE_PIPELINE.md).
 
 Outputs per-event JSON to <data-root>/coverage_pipeline/<bucket>/<event_id>.json
 
@@ -36,8 +41,8 @@ LLM_URL = os.environ.get(
     "LLM_URL",
     "<set LLM_URL env var; format: https://your-vllm-host:port/v1/chat/completions>",
 )
-LLM_MODEL = "gemma-4-26B-A4B-it"
-CONCURRENCY = 12   # below 16 to be safe
+LLM_MODEL = os.environ.get("LLM_MODEL", "Gemma-4-31B-IT")  # judge model; run once per judge for 3-of-3
+CONCURRENCY = int(os.environ.get("CONCURRENCY", "12"))     # concurrent in-flight LLM requests
 TOP_K = 10         # L2 judges top K articles by |days_to_event|
 EXCERPT_CHARS = 800
 
@@ -287,7 +292,10 @@ async def process_bucket(bucket_name: str, date_lo: datetime, date_hi: datetime,
 
     # L2 pass
     sem = asyncio.Semaphore(CONCURRENCY)
-    async with httpx.AsyncClient(verify=False) as client:
+    # TLS verification follows httpx defaults. Set LLM_VERIFY_TLS=0 only if you
+    # must talk to a self-signed endpoint you control.
+    _verify_tls = os.environ.get("LLM_VERIFY_TLS", "1") != "0"
+    async with httpx.AsyncClient(verify=_verify_tls) as client:
         tasks = []
         for ev in prepped:
             if ev["l0_count"] == 0:

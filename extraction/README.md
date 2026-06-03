@@ -4,7 +4,7 @@ This directory contains the **attestation pipeline** that derived the
 benchmark's ground-truth event set.
 
 > **Note**: The **IE→SQL baseline** (one of the 5 deployable paradigms
-> evaluated in the paper) lives at `../aggqa/baselines/ie_sql/`, not here.
+> evaluated in the paper) lives at `../qobench/baselines/ie_sql/`, not here.
 > This directory documents the *upstream* IE pipeline that produces the
 > benchmark's typed event tuples (the input to all baselines), not a
 > retrieval paradigm.
@@ -35,14 +35,14 @@ See `../docs/IE_PIPELINE.md` for full reproduction guidance. Key omissions:
   `attestation_pipeline.py` documents the per-event output format, and the
   paper's `Ê=614` events are derived from the full run.
 
-## How `extraction/` relates to `aggqa/baselines/ie_sql/`
+## How `extraction/` relates to `qobench/baselines/ie_sql/`
 
 `extraction/` (this directory) is the pipeline that **builds the
 benchmark's GT**. It runs the 3-judge attestation funnel:
 S&P events × FNSPID articles → ticker+date-window filter → 3-judge
 attestation → 614 confirmed events → benchmark.
 
-`aggqa/baselines/ie_sql/` is the **IE→SQL baseline paradigm** that the
+`qobench/baselines/ie_sql/` is the **IE→SQL baseline paradigm** that the
 benchmark evaluates. It runs an LLM-generated schema, extracts tuples from
 articles into it, builds a DuckDB, and answers questions via per-template
 SQL skeletons. It is scored against the same gold answers as the other

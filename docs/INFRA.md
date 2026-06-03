@@ -12,13 +12,13 @@ to reproduce the paper's numbers.
 The RAG and ReAct RAG baselines retrieve from a Milvus collection of news
 article chunks.
 
-- **Collection name**: `fnspid_articles` (configurable in `aggqa/config.py`)
+- **Collection name**: `fnspid_articles` (configurable in `qobench/config.py`)
 - **Vector field**: dense (Qwen3-Embedding-4B, 2560-dim), L2 distance
 - **Sparse field**: BM25 (Milvus 2.4+ built-in)
 - **Hybrid search**: RRF (`RRFRanker`, k=60) over sparse + dense
 - **Group-by**: `url_hash` (deduplicates retrieved chunks per article)
 - **Metadata fields**: `url_hash`, `date` (ISO string or yyyymmdd int —
-  format discovered at runtime via `aggqa/discover.py`), `ticker_list`
+  format discovered at runtime via `qobench/discover.py`), `ticker_list`
 
 Indexing the ~5M chunks of the FNSPID NASDAQ corpus into this schema
 requires:
@@ -46,21 +46,21 @@ Requires 2× A100/H100 (80 GB each) for the model + FlashAttention-3 kernels.
 
 ### 3. vLLM 0.19.1 (GraphRAG — separate version)
 
-GraphRAG (`aggqa/baselines/graphrag/`) needs vLLM 0.19.1 (different version
+GraphRAG (`qobench/baselines/graphrag/`) needs vLLM 0.19.1 (different version
 because graphrag 3.0.9 expects newer vLLM API behavior). Serves both:
 - chat: Qwen3.6-27B (port 8000)
 - embed: Qwen3-Embedding-4B (port 8001)
 
 ### 4. OpenRouter (ReAct baseline only)
 
-ReAct (`aggqa/baselines/react.py`) routes through OpenRouter for
+ReAct (`qobench/baselines/react.py`) routes through OpenRouter for
 Qwen3.6-27B (provider routing not pinned). Reviewers would need an
 OpenRouter API key; costs are roughly several USD for the 785-question set
 across multi-round agentic search.
 
 ### 5. GPT-5.5 (IE→SQL Stage 1 — one-shot schema generation)
 
-The IE→SQL paradigm's frozen schema (`aggqa/baselines/ie_sql/schema_gen_output.md`)
+The IE→SQL paradigm's frozen schema (`qobench/baselines/ie_sql/schema_gen_output.md`)
 was generated once by GPT-5.5 (T=0) from the event-definitions document
 alone. The schema is shipped verbatim, so reviewers do **not** need GPT-5.5
 to reproduce — they only need it if they want to regenerate the schema
@@ -80,12 +80,12 @@ The heavy index artifacts (parquets + lancedb, ~2.4 GB) live in
 
 The SQL execution stage runs on local DuckDB (no service needed). The
 events DB is built once from the extracted tuples
-(`aggqa/baselines/ie_sql/build_events_db.py`).
+(`qobench/baselines/ie_sql/build_events_db.py`).
 
 ### 8. Embedding backends (for queries)
 
-Two backends supported via `AGGQA_EMBED_BACKEND` env var (see
-`aggqa/infra/embedding.py`):
+Two backends supported via `QOBENCH_EMBED_BACKEND` env var (see
+`qobench/infra/embedding.py`):
 - `local` — Qwen3-Embedding-4B loaded on CPU (forced on macOS; MPS has a
   matmul shape bug). For Linux GPU hosts use GPU.
 - `deepinfra` — DeepInfra hosted endpoint (cheaper for query workloads;
@@ -99,14 +99,14 @@ DeepInfra in our runs.
 
 ## Discovery / smoke
 
-`aggqa/discover.py` is the Phase-0 probe: it connects to the configured
+`qobench/discover.py` is the Phase-0 probe: it connects to the configured
 Milvus endpoint, lists collections, dumps the discovered schema, and
 writes `outputs/config_runtime.json`. Running this is the first sanity
 check after standing up the services above.
 
 ## Optional but useful
 
-- `precache_retrieval.py` (`aggqa/scripts/`) — pre-runs all retrievals
+- `precache_retrieval.py` (`qobench/scripts/`) — pre-runs all retrievals
   into a JSONL cache, so the LLM-side runs become CPU/network-bound
   instead of Milvus-bound.
 - `verify_embedding_parity.py` — sanity-checks that the local Qwen3

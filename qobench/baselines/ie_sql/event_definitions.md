@@ -179,4 +179,4 @@ In all other event types (M&A_announce, M&A_complete, M&A_cancel, CEO_change, CF
   - §202.03 (Dealing with Rumors or Unusual Market Activity)
   - §703.02 (Stock Split / Stock Dividend / Distribution)
 - NASDAQ Rule 5250(e)(4) (Notice of Record Date) and IM-5250-1 (Disclosure of Material Information).
-- S&P Capital IQ Key Developments, used as operational ground-truth source, with category mapping verified against the vendor's published key-development category taxonomy.
+- S&P Capital IQ Key Developments, used as operational ground-truth source with category mapping verified against the vendor published key-development category taxonomy.

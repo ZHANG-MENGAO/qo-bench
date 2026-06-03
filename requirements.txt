@@ -1,5 +1,5 @@
 # Dependencies for the QO-Bench supplementary bundle.
-# Single source of truth (reconciled from the previous root + aggqa/ lists).
+# Single source of truth (reconciled from the previous root + qobench/ lists).
 # Install:  python -m pip install -r requirements.txt   (Python 3.10+)
 # All are public, widely-used packages.
 
