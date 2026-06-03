@@ -1,0 +1,150 @@
+### GraphRAG settings.yaml for fair-impl pilot — generated from `graphrag init` (v3.0.9), stock everything except endpoint + input format.
+### Anything below this line that is NOT a model name, endpoint, or input column is the official default.
+
+### Workflow-level concurrency (added 2026-05-15: graphrag default = 25 which capped throughput)
+concurrent_requests: 128
+async_mode: asyncio
+
+
+completion_models:
+  default_completion_model:
+    model_provider: openai
+    model: qwen3.6-27b                            # matches --served-model-name in pbs/run_pilot.pbs
+    auth_method: api_key
+    api_key: ${GRAPHRAG_API_KEY}                 # any non-empty string; vLLM ignores
+    api_base: ${VLLM_CHAT_BASE_URL}              # e.g. http://localhost:8000/v1
+    concurrent_requests: 64                       # bumped from 16 — TP=4 vllm can batch a lot
+    requests_per_minute: null                     # disable rate limit
+    tokens_per_minute: null
+    max_retries: 5
+    request_timeout: 300
+    retry:
+      type: exponential_backoff
+
+embedding_models:
+  default_embedding_model:
+    model_provider: openai
+    model: Qwen3-Embedding-4B                     # same model used in their Milvus baseline RAG → comparable
+    auth_method: api_key
+    api_key: ${GRAPHRAG_API_KEY}
+    api_base: ${VLLM_EMBED_BASE_URL}              # e.g. http://localhost:8001/v1
+    concurrent_requests: 32                       # bumped from 8
+    call_args:                                    # vLLM 0.19.1 rejects encoding_format=None; force "float"
+      encoding_format: float
+    requests_per_minute: null
+    tokens_per_minute: null
+    retry:
+      type: exponential_backoff
+
+### Document processing settings — STOCK ###
+
+input:
+  type: csv                                       # was `text`; we ship a CSV with metadata columns
+  text_column: text                               # GraphRAG sees title+body concatenated in this column
+  title_column: title
+
+chunking:
+  type: tokens
+  size: 1200
+  overlap: 100
+  encoding_model: o200k_base
+  prepend_metadata:
+    - article_url
+    - article_date
+    - article_primary_ticker
+    - article_primary_company_name
+
+
+### Storage — paths are relative to --root passed on the CLI ###
+
+input_storage:
+  type: file
+  base_dir: "input"
+
+output_storage:
+  type: file
+  base_dir: "output"
+
+reporting:
+  type: file
+  base_dir: "logs"
+
+cache:
+  type: json
+  storage:
+    type: file
+    base_dir: "cache"                             # CRITICAL: this is the cross-run reuse layer. Keep in project storage, NOT /scratch.
+
+vector_store:
+  type: lancedb
+  db_uri: output/lancedb
+
+### Workflow settings — STOCK ###
+
+embed_text:
+  embedding_model_id: default_embedding_model
+
+extract_graph:
+  completion_model_id: default_completion_model
+  prompt: "prompts/extract_graph.txt"
+  entity_types: [organization, person, geo, event]   # STOCK — do not add finance-specific types
+  max_gleanings: 2
+
+summarize_descriptions:
+  completion_model_id: default_completion_model
+  prompt: "prompts/summarize_descriptions.txt"
+  max_length: 1000
+
+extract_graph_nlp:
+  text_analyzer:
+    extractor_type: regex_english
+
+cluster_graph:
+  max_cluster_size: 10                              # STOCK Leiden param
+
+extract_claims:
+  enabled: true                                    # STOCK default off
+  completion_model_id: default_completion_model
+  prompt: "prompts/extract_claims.txt"
+  description: "Any claims or facts that could be relevant to information discovery."
+  max_gleanings: 1
+
+community_reports:
+  completion_model_id: default_completion_model
+  graph_prompt: "prompts/community_report_graph.txt"
+  text_prompt: "prompts/community_report_text.txt"
+  max_length: 2000
+  max_input_length: 8000
+
+prune_graph:
+  min_node_freq: 1            # keep entities mentioned only once (events in single article)
+  min_node_degree: 1
+  min_edge_weight_pct: 0      # don't drop weak edges
+
+snapshots:
+  graphml: true                                      # diverges from stock=false: we want the GraphML to inspect what GraphRAG extracted
+  embeddings: false
+
+### Query settings — STOCK ###
+
+local_search:
+  completion_model_id: default_completion_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/local_search_system_prompt.txt"
+
+global_search:
+  completion_model_id: default_completion_model
+  map_prompt: "prompts/global_search_map_system_prompt.txt"
+  reduce_prompt: "prompts/global_search_reduce_system_prompt.txt"
+  knowledge_prompt: "prompts/global_search_knowledge_system_prompt.txt"
+
+drift_search:
+  completion_model_id: default_completion_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/drift_search_system_prompt.txt"
+  reduce_prompt: "prompts/drift_search_reduce_prompt.txt"
+
+basic_search:
+  completion_model_id: default_completion_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/basic_search_system_prompt.txt"

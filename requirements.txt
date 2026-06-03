@@ -1,0 +1,39 @@
+# Dependencies for the QO-Bench supplementary bundle.
+# Single source of truth (reconciled from the previous root + aggqa/ lists).
+# Install:  python -m pip install -r requirements.txt   (Python 3.10+)
+# All are public, widely-used packages.
+
+# --- LLM / RAG / agentic baselines (RAG, ReAct RAG, LC-oracle, no-context) ---
+langchain>=1.0,<2
+langchain-core>=1.0,<2
+langchain-openai>=0.2,<0.4
+langchain-milvus>=0.1
+langgraph>=1.0,<2
+openai>=1.40,<2
+httpx>=0.27
+requests>=2.32
+pydantic>=2.7,<3
+python-dotenv>=1.0
+python-dateutil>=2.9
+pandas>=2.0
+
+# --- Milvus hybrid retriever + Qwen3 embedding/reranker ---
+# (local backend uses sentence-transformers/torch; a hosted Milvus is required for RAG/ReAct)
+pymilvus>=2.5,<2.6
+sentence-transformers>=3.0
+torch>=2.2
+transformers>=4.44
+
+# --- GraphRAG baseline (stock package, no local edits) ---
+graphrag==3.0.9
+
+# --- IE->SQL events database ---
+duckdb>=0.10
+
+# --- Eval + tests ---
+pytest>=8.0
+
+# --- Optional: only for re-running the 3-judge attestation that BUILT the
+#     ground truth (extraction/attestation_pipeline.py). Not needed to run the
+#     benchmark or reproduce results, since the gold answers are released. ---
+# pymongo>=4.8,<5

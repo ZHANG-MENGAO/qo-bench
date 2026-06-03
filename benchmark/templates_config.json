@@ -1,0 +1,807 @@
+{
+  "_meta": {
+    "version": "v5",
+    "schema_note": "Per-template scoring config (paper A/B IDs). Each entry: scoring mode, identity_keys, output_schema.",
+    "event_types": [
+      "M&A_announce",
+      "M&A_complete",
+      "M&A_cancel",
+      "M&A_rumor",
+      "CEO_change",
+      "CFO_change",
+      "IPO",
+      "Stock_split"
+    ],
+    "ma_stages": [
+      "M&A_announce",
+      "M&A_complete",
+      "M&A_cancel"
+    ],
+    "roles": [
+      "buyer",
+      "target",
+      "seller"
+    ]
+  },
+  "A.1.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string",
+            "description": "Public ticker, uppercase"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "M&A_announce",
+              "M&A_complete",
+              "M&A_cancel",
+              "M&A_rumor",
+              "CEO_change",
+              "CFO_change",
+              "IPO",
+              "Stock_split"
+            ]
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "buyer",
+              "target",
+              "seller",
+              null
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Article URLs supporting this row"
+          }
+        }
+      }
+    }
+  },
+  "A.1.2": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "A.2.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "A.3.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string",
+            "description": "Public ticker, uppercase"
+          },
+          "event_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "M&A_announce",
+              "M&A_complete",
+              "M&A_cancel",
+              null
+            ]
+          },
+          "anchor_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "buyer",
+              "target",
+              "seller",
+              null
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Article URLs supporting this row"
+          }
+        }
+      },
+      "description": "T18 form (Entity): firm_ticker only. T40 form (Event): firm_ticker + event_type + anchor_date + role. Both share one template id; identity match by (firm, event_type, anchor_date) — for T18 GT rows the latter two are null and match preds that omit them."
+    }
+  },
+  "B.1.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": " GT now also includes question-level anchor_event (F_anchor + E + W + golden_chunks); with_prov pools row chunks + anchor chunks."
+    }
+  },
+  "B.1.2": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "identity_keys_sorted": [
+      "e1_anchor_date",
+      "e2_anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "e1_anchor_date",
+          "e2_anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "e1_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "e2_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "gap_days": {
+            "type": "integer"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "B.1.3": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "e_trigger_anchor_date",
+      "e_followup_anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "e_trigger_anchor_date",
+          "e_followup_anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "e_trigger_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "e_followup_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "lag_days": {
+            "type": "integer"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "B.1.4": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "buyer_ticker",
+      "target_ticker",
+      "announce_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "buyer_ticker",
+          "target_ticker",
+          "announce_date",
+          "close_date"
+        ],
+        "properties": {
+          "buyer_ticker": {
+            "type": "string"
+          },
+          "target_ticker": {
+            "type": "string"
+          },
+          "announce_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "close_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "B.1.5": {
+    "scoring": "composite_b16",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": false,
+    "output_schema": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "e1_anchor_date",
+          "e2_anchor_date",
+          "days_between"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "e1_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "e2_anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "days_between": {
+            "type": "integer"
+          }
+        }
+      },
+      "description": "Single-row answer with both anchor dates + days_between. Strict: all three exact. Tolerant: dates +/-7d, days_between +/-14d."
+    }
+  },
+  "B.2.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "preserves_order": false,
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "Tie-inclusive: return all events that share the extremal date."
+    }
+  },
+  "B.2.2": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "preserves_order": true,
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "Must be ordered chronologically by anchor_date ascending."
+    }
+  },
+  "B.3.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "List of distinct firm_tickers. GT internally lists qualifying_events per firm; each event has its own golden_chunks (per-event grounded). Identity match on firm_ticker; with_prov pools URLs across all qualifying_events."
+    }
+  },
+  "B.3.2": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "List of distinct firm_tickers. GT internally lists qualifying_events per firm; each event has its own golden_chunks (per-event grounded). Identity match on firm_ticker; with_prov pools URLs across all qualifying_events."
+    }
+  },
+  "B.3.3": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "List of distinct firm_tickers. GT internally lists qualifying_events per firm; each event has its own golden_chunks (per-event grounded). Identity match on firm_ticker; with_prov pools URLs across all qualifying_events."
+    }
+  },
+  "B.4.1": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "List of distinct firm_tickers. GT internally lists qualifying_events per firm; each event has its own golden_chunks (per-event grounded). Identity match on firm_ticker; with_prov pools URLs across all qualifying_events."
+    }
+  },
+  "B.4.2": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "List of distinct firm_tickers. GT internally lists qualifying_events per firm; each event has its own golden_chunks (per-event grounded). Identity match on firm_ticker; with_prov pools URLs across all qualifying_events."
+    }
+  },
+  "B.4.3": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date",
+          "bucket"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bucket": {
+            "type": "string",
+            "description": "Time bucket label (e.g. '2020-Q2')"
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "B.4.4": {
+    "scoring": "list_recall",
+    "identity_keys": [
+      "firm_ticker",
+      "event_type",
+      "anchor_date"
+    ],
+    "supports_provenance": true,
+    "output_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "firm_ticker",
+          "event_type",
+          "anchor_date"
+        ],
+        "properties": {
+          "firm_ticker": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string",
+            "description": "Doubles as the type label."
+          },
+          "anchor_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_ticker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cited_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

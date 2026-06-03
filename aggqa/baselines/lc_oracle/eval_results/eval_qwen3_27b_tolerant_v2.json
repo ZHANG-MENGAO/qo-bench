@@ -1,0 +1,179 @@
+{
+ "by_id": {
+  "A.1.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7226888111888111,
+   "mean_recall_with_prov": 0.7226888111888111,
+   "n_with_provenance": 50
+  },
+  "A.1.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.8315476190476189,
+   "mean_recall_with_prov": 0.8315476190476189,
+   "n_with_provenance": 50
+  },
+  "A.2.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7733333333333334,
+   "mean_recall_with_prov": 0.7433333333333333,
+   "n_with_provenance": 50
+  },
+  "A.3.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.3528412698412698,
+   "mean_recall_with_prov": 0.3528412698412698,
+   "n_with_provenance": 50
+  },
+  "B.1.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7050144855144854,
+   "mean_recall_with_prov": 0.6966963036963035,
+   "n_with_provenance": 50
+  },
+  "B.1.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.4171666666666667,
+   "mean_recall_with_prov": 0.4171666666666667,
+   "n_with_provenance": 50
+  },
+  "B.1.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.4395,
+   "mean_recall_with_prov": 0.4395,
+   "n_with_provenance": 50
+  },
+  "B.1.4": {
+   "n": 39,
+   "mean_recall_no_prov": 0.22606837606837607,
+   "mean_recall_with_prov": 0.22606837606837607,
+   "n_with_provenance": 39
+  },
+  "B.1.5": {
+   "n": 50,
+   "mean_recall_no_prov": 0.76
+  },
+  "B.2.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.5466666666666666,
+   "mean_recall_with_prov": 0.5466666666666666,
+   "n_with_provenance": 50
+  },
+  "B.2.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.652,
+   "mean_recall_with_prov": 0.652,
+   "n_with_provenance": 50
+  },
+  "B.3.1": {
+   "n": 30,
+   "mean_recall_no_prov": 0.07777777777777777,
+   "mean_recall_with_prov": 0.07777777777777777,
+   "n_with_provenance": 30
+  },
+  "B.3.2": {
+   "n": 46,
+   "mean_recall_no_prov": 0.0,
+   "mean_recall_with_prov": 0.0,
+   "n_with_provenance": 46
+  },
+  "B.3.3": {
+   "n": 15,
+   "mean_recall_no_prov": 0.07777777777777777,
+   "mean_recall_with_prov": 0.07777777777777777,
+   "n_with_provenance": 15
+  },
+  "B.4.1": {
+   "n": 16,
+   "mean_recall_no_prov": 0.28124999999999994,
+   "mean_recall_with_prov": 0.28124999999999994,
+   "n_with_provenance": 16
+  },
+  "B.4.2": {
+   "n": 39,
+   "mean_recall_no_prov": 0.4358974358974359,
+   "mean_recall_with_prov": 0.4358974358974359,
+   "n_with_provenance": 39
+  },
+  "B.4.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.6854575424575426,
+   "mean_recall_with_prov": 0.6789575424575426,
+   "n_with_provenance": 50
+  },
+  "B.4.4": {
+   "n": 50,
+   "mean_recall_no_prov": 0.6273322437982892,
+   "mean_recall_with_prov": 0.6249036723697178,
+   "n_with_provenance": 50
+  }
+ },
+ "by_sub_axis": {
+  "A.1": {
+   "n": 100,
+   "mean_recall_no_prov": 0.777118215118215,
+   "mean_recall_with_prov": 0.777118215118215,
+   "n_with_provenance": 100
+  },
+  "A.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7733333333333334,
+   "mean_recall_with_prov": 0.7433333333333333,
+   "n_with_provenance": 50
+  },
+  "A.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.3528412698412698,
+   "mean_recall_with_prov": 0.3528412698412698,
+   "n_with_provenance": 50
+  },
+  "B.1": {
+   "n": 239,
+   "mean_recall_no_prov": 0.5225971727017753,
+   "mean_recall_with_prov": 0.4575916147344719,
+   "n_with_provenance": 189
+  },
+  "B.2": {
+   "n": 100,
+   "mean_recall_no_prov": 0.5993333333333333,
+   "mean_recall_with_prov": 0.5993333333333333,
+   "n_with_provenance": 100
+  },
+  "B.3": {
+   "n": 91,
+   "mean_recall_no_prov": 0.03846153846153846,
+   "mean_recall_with_prov": 0.03846153846153846,
+   "n_with_provenance": 91
+  },
+  "B.4": {
+   "n": 155,
+   "mean_recall_no_prov": 0.5621902536309134,
+   "mean_recall_with_prov": 0.5593100692991162,
+   "n_with_provenance": 155
+  }
+ },
+ "by_cap": {
+  "A": {
+   "n": 200,
+   "mean_recall_no_prov": 0.6701027583527583,
+   "mean_recall_with_prov": 0.6626027583527584,
+   "n_with_provenance": 200
+  },
+  "B": {
+   "n": 585,
+   "mean_recall_no_prov": 0.4708949520031612,
+   "mean_recall_with_prov": 0.44226394254114315,
+   "n_with_provenance": 535
+  }
+ },
+ "overall": {
+  "n": 785,
+  "mean_recall_no_prov": 0.5216485332387274,
+  "mean_recall_with_prov": 0.5022200828980452,
+  "n_with_provenance": 735
+ },
+ "tolerance_days": 7,
+ "n_questions": 785,
+ "n_predictions": 785,
+ "n_missing_preds": 0,
+ "n_unknown_ids": 0
+}

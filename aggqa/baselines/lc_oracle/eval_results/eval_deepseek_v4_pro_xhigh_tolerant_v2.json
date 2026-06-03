@@ -1,0 +1,179 @@
+{
+ "by_id": {
+  "A.1.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7161565656565655,
+   "mean_recall_with_prov": 0.7161565656565655,
+   "n_with_provenance": 50
+  },
+  "A.1.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.8441190476190477,
+   "mean_recall_with_prov": 0.8441190476190477,
+   "n_with_provenance": 50
+  },
+  "A.2.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.76,
+   "mean_recall_with_prov": 0.75,
+   "n_with_provenance": 50
+  },
+  "A.3.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.3536746031746032,
+   "mean_recall_with_prov": 0.3536746031746032,
+   "n_with_provenance": 50
+  },
+  "B.1.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.016,
+   "mean_recall_with_prov": 0.016,
+   "n_with_provenance": 50
+  },
+  "B.1.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.4186666666666667,
+   "mean_recall_with_prov": 0.38116666666666665,
+   "n_with_provenance": 50
+  },
+  "B.1.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.45283333333333337,
+   "mean_recall_with_prov": 0.4095,
+   "n_with_provenance": 50
+  },
+  "B.1.4": {
+   "n": 39,
+   "mean_recall_no_prov": 0.24102564102564103,
+   "mean_recall_with_prov": 0.24102564102564103,
+   "n_with_provenance": 39
+  },
+  "B.1.5": {
+   "n": 50,
+   "mean_recall_no_prov": 0.76
+  },
+  "B.2.1": {
+   "n": 50,
+   "mean_recall_no_prov": 0.5966666666666667,
+   "mean_recall_with_prov": 0.5966666666666667,
+   "n_with_provenance": 50
+  },
+  "B.2.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.635,
+   "mean_recall_with_prov": 0.635,
+   "n_with_provenance": 50
+  },
+  "B.3.1": {
+   "n": 30,
+   "mean_recall_no_prov": 0.06944444444444445,
+   "mean_recall_with_prov": 0.06944444444444445,
+   "n_with_provenance": 30
+  },
+  "B.3.2": {
+   "n": 46,
+   "mean_recall_no_prov": 0.0,
+   "mean_recall_with_prov": 0.0,
+   "n_with_provenance": 46
+  },
+  "B.3.3": {
+   "n": 15,
+   "mean_recall_no_prov": 0.0911111111111111,
+   "mean_recall_with_prov": 0.0911111111111111,
+   "n_with_provenance": 15
+  },
+  "B.4.1": {
+   "n": 16,
+   "mean_recall_no_prov": 0.26041666666666663,
+   "mean_recall_with_prov": 0.26041666666666663,
+   "n_with_provenance": 16
+  },
+  "B.4.2": {
+   "n": 39,
+   "mean_recall_no_prov": 0.41880341880341876,
+   "mean_recall_with_prov": 0.41880341880341876,
+   "n_with_provenance": 39
+  },
+  "B.4.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7377042957042957,
+   "mean_recall_with_prov": 0.7377042957042957,
+   "n_with_provenance": 50
+  },
+  "B.4.4": {
+   "n": 50,
+   "mean_recall_no_prov": 0.7105294343449884,
+   "mean_recall_with_prov": 0.7105294343449884,
+   "n_with_provenance": 50
+  }
+ },
+ "by_sub_axis": {
+  "A.1": {
+   "n": 100,
+   "mean_recall_no_prov": 0.7801378066378065,
+   "mean_recall_with_prov": 0.7801378066378065,
+   "n_with_provenance": 100
+  },
+  "A.2": {
+   "n": 50,
+   "mean_recall_no_prov": 0.76,
+   "mean_recall_with_prov": 0.75,
+   "n_with_provenance": 50
+  },
+  "A.3": {
+   "n": 50,
+   "mean_recall_no_prov": 0.3536746031746032,
+   "mean_recall_with_prov": 0.3536746031746032,
+   "n_with_provenance": 50
+  },
+  "B.1": {
+   "n": 239,
+   "mean_recall_no_prov": 0.38399581589958154,
+   "mean_recall_with_prov": 0.2631393298059964,
+   "n_with_provenance": 189
+  },
+  "B.2": {
+   "n": 100,
+   "mean_recall_no_prov": 0.6158333333333332,
+   "mean_recall_with_prov": 0.6158333333333332,
+   "n_with_provenance": 100
+  },
+  "B.3": {
+   "n": 91,
+   "mean_recall_no_prov": 0.037912087912087916,
+   "mean_recall_with_prov": 0.037912087912087916,
+   "n_with_provenance": 91
+  },
+  "B.4": {
+   "n": 155,
+   "mean_recall_no_prov": 0.5994302354997688,
+   "mean_recall_with_prov": 0.5994302354997688,
+   "n_with_provenance": 155
+  }
+ },
+ "by_cap": {
+  "A": {
+   "n": 200,
+   "mean_recall_no_prov": 0.6684875541125542,
+   "mean_recall_with_prov": 0.6659875541125543,
+   "n_with_provenance": 200
+  },
+  "B": {
+   "n": 585,
+   "mean_recall_no_prov": 0.4268718287791411,
+   "mean_recall_with_prov": 0.3881838376993101,
+   "n_with_provenance": 535
+  }
+ },
+ "overall": {
+  "n": 785,
+  "mean_recall_no_prov": 0.48842997536090244,
+  "mean_recall_with_prov": 0.4637766857029138,
+  "n_with_provenance": 735
+ },
+ "tolerance_days": 7,
+ "n_questions": 785,
+ "n_predictions": 785,
+ "n_missing_preds": 0,
+ "n_unknown_ids": 0
+}

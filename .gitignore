@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Runtime outputs / caches
+runs/outputs/*
+!runs/outputs/.gitkeep
+retrieval_cache*.jsonl
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
